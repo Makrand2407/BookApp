@@ -1,0 +1,52 @@
+Create database BookApp;
+use BookApp;
+
+-- create admin table--
+CREATE TABLE Admin (
+  adminId int primary key auto_increment,
+  adminUser varchar(255) NOT NULL,
+  adminPwd varchar(255) NOT NULL
+);
+
+INSERT INTO Admin VALUES (1,'admin@.com','admin@123');
+
+-- create customer table--
+CREATE TABLE Customer(
+  customerId int primary key NOT NULL AUTO_INCREMENT,
+  name varchar(255) NOT NULL,
+  custUser varchar(255) NOT NULL,
+  custPwd varchar(255) NOT NULL
+);
+
+INSERT INTO Customer VALUES 
+(1,'Makrand','Makrand@gmail.com','Makrand@123'),
+(2,'Bhavesh','Bhavesh@gmail.com','Bhavesh@123'),
+(3,'Tejas','Tejas@gmail.com','Tejas@123'),
+(4,'Yash','Yash@gmail.com','Yash@123'),
+(5,'Pranav','Pranav@gmail.com','Pranav@123'),
+(6,'Pranjal','Pranjal@gmail.com','Pranjal@123');
+
+create table Book (
+  bookId int primary key auto_increment,
+  title varchar(100) not null,
+  author varchar(100) not null,
+  genre varchar(50) not null,
+  price decimal(10,2) not null,
+  quantity int not null
+);
+
+INSERT INTO Book (title, author, genre, price, quantity) VALUES 
+('To Kill a Mockingbird', 'Harper Lee', 'Fiction', 12.99, 100),
+('1984', 'George Orwell', 'Dystopian', 10.49, 80),
+('The Great Gatsby', 'F. Scott Fitzgerald', 'Classic', 9.99, 120),
+('Harry Potter and the Philosopher''s Stone', 'J.K. Rowling', 'Fantasy', 14.99, 150),
+('The Catcher in the Rye', 'J.D. Salinger', 'Literary Fiction', 11.79, 90);
+
+create table Orders(
+    orderId int primary key auto_increment,
+    customerId int,
+    bookId int,
+    quantity int not null,
+    FOREIGN KEY (customerId) REFERENCES Customer (customerId),
+    FOREIGN KEY (bookId) REFERENCES Book (bookId)
+    );
